@@ -45,3 +45,8 @@ Route::get('/peliculas/create',[App\Http\Controllers\PeliculaController::class, 
 //Boton guardar pelicula al crear una pelicula
 Route::post('crear_peliculas',[App\Http\Controllers\PeliculaController::class, 'store'])->name('crearpeliculas');
 
+//COMIENZO CON PLANTILLA
+
+Route::get('/plantilla/inicio', [App\Http\Controllers\PlantillaController::class, 'inicio'])->name('inicio_plantilla');
+
+Route::get('/plantilla/mostrar', [App\Http\Controllers\PlantillaController::class, 'mostrar'])->name('mostrar_peliculas_plantilla');

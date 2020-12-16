@@ -1,6 +1,9 @@
-<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>
 
-<a href="/peliculas/create" class="btn btn-primary">CREAR</a> 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalmostrarpelicula" 
+        data-mostrarpelicula="{{$id}}">
+    Mostrar
+</button>
+
 
 
 <form action="{{route('peliculas.destroy')}}" method="POST">
@@ -9,5 +12,7 @@
                 <a href="/peliculas/{{$codigo}}/edit" class="btn btn-info">Editar</a>
                 <button type = "submit" class="btn btn-danger">Borrar</button>
 </form>
+
+
 
              

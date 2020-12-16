@@ -17,7 +17,7 @@ class PeliculaController extends Controller
      
     public function index(Request $request)
     {
-        $peliculas=Pelicula::select('codigo','descripcion','cantidad','precio')->get();
+        $peliculas=Pelicula::select('id','codigo','descripcion','cantidad','precio')->get();
         if ($request->ajax()) {
             //$peliculas=Pelicula::all();
             //dd($data);
@@ -57,6 +57,11 @@ class PeliculaController extends Controller
         $peliculas->descripcion = $request->get('descripcion');
         $peliculas->cantidad = $request->get('cantidad');
         $peliculas->precio = $request->get('precio');
+        $peliculas->duracion = $request->get('duracion');
+        $peliculas->anio = $request->get('anio');
+        $peliculas->valoracion = $request->get('valoracion');
+        $peliculas->nombre = $request->get('nombre');
+
 
         $peliculas->save();
 
@@ -71,7 +76,7 @@ class PeliculaController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -83,7 +88,7 @@ class PeliculaController extends Controller
     public function edit($codigo)
     {
        
-        $peliculas=Pelicula::select('id','codigo','descripcion','cantidad','precio')->
+        $peliculas=Pelicula::select('id','codigo','descripcion','cantidad','precio','duracion','anio','valoracion','nombre')->
                                 where('codigo','=',$codigo)->first();
         //$pelicula=Pelicula::find($id);
         //dd($peliculas);
@@ -99,16 +104,37 @@ class PeliculaController extends Controller
      */
     public function update(Request $request)
     {
-        //dd($request);
-        //traigo la pelicula y capturo los nuevos datos
-        $pelicula = Pelicula::find($request->id_pelicula);
-        $pelicula->codigo = $request->get('codigo');
-        $pelicula->descripcion = $request->get('descripcion');
-        $pelicula->cantidad = $request->get('cantidad');
-        $pelicula->precio = $request->get('precio');
-        $pelicula->save();
+        // //dd($request);
+        // //traigo la pelicula y capturo los nuevos datos
+        // $pelicula = Pelicula::find($request->id_pelicula);
+        // //dd($pelicula);
+        // $pelicula->codigo = $request->get('codigo');
+        // $pelicula->descripcion = $request->get('descripcion');
+        // $pelicula->cantidad = $request->get('cantidad');
+        // $pelicula->precio = $request->get('precio');
+        // $peliculas->duracion = $request->get('duracion');
+        // $peliculas->anio = $request->get('anio');
+        // $peliculas->valoracion = $request->get('valoracion');
+        // $peliculas->nombre = $request->get('nombre');
+        // $pelicula->save();
+        
+
+        Pelicula::where('id', $request->id_pelicula)
+                    ->update([
+                        'codigo' => $request->codigo,
+                        'descripcion' => $request->descripcion,
+                        'cantidad' => $request->cantidad,
+                        'precio' => $request->precio,
+                        'duracion' => $request->duracion,
+                        'anio' => $request->anio,
+                        'valoracion' => $request->valoracion,
+                        'nombre' => $request->nombre,
+                      
+                ]);
 
         return redirect('/peliculas');
+
+        
     }
 
     /**
@@ -120,8 +146,11 @@ class PeliculaController extends Controller
     public function destroy(Request $request)
     {
         //dd($request);
-        $pelicula = Pelicula::find($request->id_pelicula);        
-        $pelicula->delete();
+        //eliminar 
+        Pelicula::select('codigo')->where('codigo','=',$request->codigo_pelicula)->delete();  
+        //DB::table('mantenimientos')->where('id', $request->id_delete)->delete();
+        //dd($pelicula->codigo);      
+        //$pelicula->delete();
 
         return redirect('/peliculas');
     }

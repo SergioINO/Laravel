@@ -19,6 +19,10 @@ class CreatePeliculasTable extends Migration
             $table->string('descripcion',50);
             $table->integer('cantidad');
             $table->decimal('precio', 8,2);
+            $table->string('duracion',50);
+            $table->string('anio',50);
+            $table->string('valoracion',50);
+            $table->string('nombre',50);
             $table->timestamps();
         });
     }
