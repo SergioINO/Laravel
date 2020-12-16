@@ -129,7 +129,6 @@ class PeliculaController extends Controller
                         'anio' => $request->anio,
                         'valoracion' => $request->valoracion,
                         'nombre' => $request->nombre,
-                      
                 ]);
 
         return redirect('/peliculas');
